@@ -12,41 +12,56 @@ using namespace std;
 // 时间复杂度和空间复杂度都是O(n)的做法
 int find_main_ele(int* list, int* length)
 {
-    int result = -1;
-    /*int* bucket = new int(*length);*/
-    int bucket[100] = {0};
-    for (int i = 0; i < *length; i++)
+    int cnt = 0;
+    int number = list[0];
+    for (int i = 1; i < *length; i++)
     {
-        bucket[list[i]]++;
-    }
-    int criticalValue = *length / 2;
-    for (int i = 0; i < *length; i++)
-    {
-        if (bucket[i] > criticalValue)
+        if (list[i] == number)
         {
-            return i;
+            cnt++;
+        }
+        else
+        {
+            if (cnt > 0)
+            {
+                cnt--;
+            }
+            else
+            {
+                number = list[i];
+            }
         }
     }
-    return -1;
+    cnt = 0;
+    for (int i = 0; i < *length; i++)
+    {
+        if (list[i] == number)
+        {
+            cnt++;
+        }
+    }
+    if (cnt > *length / 2)
+    {
+        return number;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 int main()
 {
-    int length;
-    cin >> length;
-    int* list_1 = new int(length);
-    for (int i = 0; i < length; i++)
+    int list[] = {1, 2, 3, 2, 2, 2, 5, 4, 2};
+    int length = sizeof(list) / sizeof(int);
+    int main_ele = find_main_ele(list, &length);
+    if (main_ele != -1)
     {
-        cin >> list_1[i];
-    }
-    int result = find_main_ele(list_1, &length);
-    if (result == -1)
-    {
-        cout << "No main element" << endl;
+        cout << "The main element is " << main_ele << endl;
     }
     else
     {
-        cout << result << endl;
+        cout << "There is no main element in the array" << endl;
     }
     return 0;
 }

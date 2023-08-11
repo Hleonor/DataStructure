@@ -2,7 +2,6 @@
 // Created by Hleonor on 2023-08-11.
 //
 #include <iostream>
-
 using namespace std;
 
 struct ListNode

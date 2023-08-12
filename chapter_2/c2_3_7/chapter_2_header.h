@@ -4,7 +4,8 @@
 
 #ifndef DATASTRUCTURE_CHAPTER_2_HEADER_H
 #define DATASTRUCTURE_CHAPTER_2_HEADER_H
-
+#include <iostream>
+using namespace std;
 struct ListNode
 {
     int number;

@@ -39,5 +39,6 @@ ListNode* build_list()
         currentNode->next = next;
         currentNode = next;
     }
+    return head;
 }
 #endif //DATASTRUCTURE_CHAPTER_2_HEADER_H

@@ -9,7 +9,6 @@
 void keep_one_absolute(ListNode* head)
 {
     ListNode* cur = head->next;
-    while ()
 }
 
 int main()

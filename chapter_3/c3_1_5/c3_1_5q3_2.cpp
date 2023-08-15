@@ -27,7 +27,7 @@ int main()
                 i_num--;
             }
         }
-        if (flag)
+        if (flag && i_num == 0)
         {
             cout << "The string is legal." << endl;
         }

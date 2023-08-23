@@ -11,29 +11,18 @@ int main()
     TreeNode* root = build_tree();
     TreeNode* cur_node = root;
     stack<TreeNode*> myStack;
-    while (true)
+    while (cur_node || !myStack.empty())
     {
-        while (cur_node) // 当左孩子为空的时候退出循环
+        if (cur_node)
         {
             myStack.push(cur_node);
             cur_node = cur_node->left;
         }
-
-        while (!myStack.empty())
+        else
         {
             cout << myStack.top()->val << " ";
-            if (myStack.top()->right)
-            {
-                cur_node = myStack.top()->right;
-                myStack.pop();
-                break;
-            }
+            cur_node = myStack.top()->right;
             myStack.pop();
-        }
-
-        if (cur_node == nullptr)
-        {
-            break;
         }
     }
 }

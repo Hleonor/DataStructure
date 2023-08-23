@@ -11,5 +11,8 @@ int main()
     middle_traversal(root);
     cout << endl;
     behind_traversal(root);
+    cout << endl;
+    hierarchicalTraversal(root);
+    cout << endl;
     return 0;
 }

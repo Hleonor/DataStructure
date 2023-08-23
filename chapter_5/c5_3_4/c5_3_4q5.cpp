@@ -8,27 +8,34 @@
 int main()
 {
     TreeNode* root = build_tree();
-    int nodeNum = 0;
-    queue<TreeNode*> queue;
+    queue<TreeNode*> myQueue;
+    TreeNode* right = nullptr;
+    int level = 0;
     if (root)
     {
-        queue.push(root);
-        while (!queue.empty())
+        myQueue.push(root);
+        right = root;
+        while (!myQueue.empty())
         {
-            TreeNode* node = queue.front();
-            queue.pop();
-            nodeNum++;
+            // 先入队再出队
+            TreeNode* node = myQueue.front();
             if (node->left)
             {
-                queue.push(node->left);
+                myQueue.push(node->left);
             }
             if (node->right)
             {
-                queue.push(node->right);
+                myQueue.push(node->right);
             }
-            delete node;
+            if (node == right)
+            {
+                level++;
+                right = node->right;
+            }
+            myQueue.pop();
         }
     }
-    cout << "The height of tree is: " << (int)log2(nodeNum) + 1 << endl;
+
+    cout << "The height of tree is: "  << level << endl;
     return 0;
 }

@@ -6,6 +6,7 @@
 #define DATASTRUCTURE_CHAPTER5_HEADER_H
 #include <iostream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 

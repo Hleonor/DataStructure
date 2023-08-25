@@ -91,7 +91,31 @@ void hierarchicalTraversal(TreeNode* root)
             {
                 queue.push(node->right);
             }
-            delete node;
+        }
+    }
+}
+
+void delete_tree(TreeNode* root)
+{
+    if (root)
+    {
+        if (root->left == nullptr && root->right == nullptr)
+        {
+            delete root;
+            root = nullptr;
+        }
+        else
+        {
+            if (root->left) // 先处理左子树
+            {
+                delete_tree(root->left);
+                root->left = nullptr;
+            }
+            if (root->right) // 然后处理右子树
+            {
+                delete_tree(root->right);
+                root->right = nullptr;
+            }
         }
     }
 }

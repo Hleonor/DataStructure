@@ -26,7 +26,7 @@ void find_k(TreeNode* root,int k)
 int main()
 {
     TreeNode* root = build_tree();
-    int k = 100;
+    int k = 0;
     find_k(root, k);
     if (node)
     {

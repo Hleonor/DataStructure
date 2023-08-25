@@ -97,26 +97,25 @@ void hierarchicalTraversal(TreeNode* root)
 
 void delete_tree(TreeNode* root)
 {
-    if (root)
+    if (root->left == nullptr && root->right == nullptr) // 叶子节点直接删除
     {
-        if (root->left == nullptr && root->right == nullptr)
+        delete root;
+        root = nullptr;
+    }
+    else
+    {
+        if (root->left) // 如果有左子树
         {
-            delete root;
-            root = nullptr;
+            delete_tree(root->left);
+            root->left = nullptr;
         }
-        else
+        if (root->right)
         {
-            if (root->left) // 先处理左子树
-            {
-                delete_tree(root->left);
-                root->left = nullptr;
-            }
-            if (root->right) // 然后处理右子树
-            {
-                delete_tree(root->right);
-                root->right = nullptr;
-            }
+            delete_tree(root->right);
+            root->right = nullptr;
         }
+        delete root;
+        root = nullptr;
     }
 }
 

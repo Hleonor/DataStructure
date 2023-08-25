@@ -3,6 +3,7 @@
 //
 #include "chapter5_header.h"
 
+// 要特别注意，传参的问题，这里反复出现问题，就是因为只是将参数的root设置为了nullptr，而不是真正把原来的树中的指针设置为了空
 void delete_x(TreeNode*& root, int x)
 {
     if (root)

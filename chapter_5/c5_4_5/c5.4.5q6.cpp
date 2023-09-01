@@ -28,47 +28,44 @@ TreeNode* build_tree()
     return new_node;
 }
 
-void build_brothers(TreeNode* node, string sequence, int edgeNum)
-{
-
-}
 
 TreeNode* build_tree(string sequence, vector<int> edgeNum)
 {
     TreeNode* root = nullptr;
-    TreeNode* cur = root;
-    int pos = 0; // 指向最左边的还没使用过的节点
-    int i = 0; // 用来访问edgeNum
-    while (pos != sequence.size())
+    vector<TreeNode*> tree_nodes;
+    for (int i = 0; i < sequence.size(); i++)
     {
-        cur = new TreeNode;
-        cur->val = sequence[pos];
-        if (edgeNum[i] >= 1) // 说明至少有一个孩子的情况
+        TreeNode* tmp = new TreeNode;
+        tmp->val = sequence[i];
+        tmp->left = nullptr;
+        tmp->right = nullptr;
+        tree_nodes.push_back(tmp);
+    }
+    int pos = 0;
+    for (int i = 0; i < sequence.size(); i++)
+    {
+        int degree = edgeNum[i];
+        if (degree)
         {
-            TreeNode* tmp = new TreeNode;
             pos++;
-            tmp->val = sequence[pos];
-            cur->left = tmp;
-            edgeNum[i]--;
-            if (edgeNum[i] >= 1) // 说明tmp至少有一个兄弟，则构建兄弟
+            tree_nodes[i]->left = tree_nodes[pos];
+            for (int j = 2; j <= degree; j++)
             {
-                build_brothers(tmp, sequence.substr(pos, edgeNum[i]), edgeNum[i]);
+                pos++;
+                tree_nodes[pos - 1]->right = tree_nodes[pos];
             }
-            pos += edgeNum[i];
-            cur = cur->left;
-            i++;
-        }
-        else
-        {
-            delete cur;
-
         }
     }
-
+    if (!tree_nodes.empty())
+    {
+        root = tree_nodes[0];
+    }
     return root;
 }
 
 // G H K # L # # I # J M P # # N # O # # # #
+// GHIJKLMNOP
+// 3 2 0 3 0 0 1 0 0 0
 int main()
 {
     string sequence;
@@ -84,6 +81,27 @@ int main()
         edgeNum.push_back(num);
     }
 
+    TreeNode* root = build_tree(sequence, edgeNum);
+    // 打印树
+    queue<TreeNode*> queue;
+    if (root)
+    {
+        queue.push(root);
+        while (!queue.empty())
+        {
+            TreeNode* node = queue.front();
+            queue.pop();
+            cout << node->val << " ";
+            if (node->left)
+            {
+                queue.push(node->left);
+            }
+            if (node->right)
+            {
+                queue.push(node->right);
+            }
+        }
+    }
 
     return 0;
 }

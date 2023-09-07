@@ -21,16 +21,16 @@ bool dfs(int cur, int father)
         {
             if (dfs(node->VerAdj, cur))
             {
-                return true;
+                return false;
             }
         }
-        else if (node->VerAdj != father)
+        else if (node->VerAdj != father) // 如果当前节点被访问过，但是不是父节点，说明存在回路，即不是树
         {
-            return true;
+            return false;
         }
         node = node->link;
     }
-    return false;
+    return true;
 }
 
 bool hasCircle(int n)
@@ -49,9 +49,9 @@ bool hasCircle(int n)
     }
     if (cnt > 1)
     {
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
 int main()

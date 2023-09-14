@@ -26,7 +26,7 @@ struct HeadNode
     HeadNode(int VerName) : VerName(VerName), adjacent(NULL) {};
 };
 
-HeadNode* head = new HeadNode[1000];
+HeadNode head[1000];
 
 void getMap(int n, int e)
 {

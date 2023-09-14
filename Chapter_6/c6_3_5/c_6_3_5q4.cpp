@@ -9,45 +9,32 @@ int pre_node[999] = {0}; // 默认0表示没有前驱，当存在多个前驱的
 
 bool hasPathBfs(int n, int start, int end)
 {
-    bool book = false;
     queue<int> myQueue;
     myQueue.push(head[1].VerName);
     visit[head[1].VerName] = true;
+    if (head[1].VerName == end)
+    {
+        return true;
+    }
     while (!myQueue.empty())
     {
         int number = myQueue.front();
         myQueue.pop();
-        HeadNode headNode;
-        for (int i = 1; i <= n; i++)
+        HeadNode cur_head = head[number];
+        for (EdgeNode* node = cur_head.adjacent; node != nullptr; node = node->link)
         {
-            if (head[i].VerName == number)
+            if (node->VerAdj == end)
             {
-                headNode = head[i];
-                break;
+                return true;
             }
-        }
-        EdgeNode* node = headNode.adjacent;
-        while (node)
-        {
             if (visit[node->VerAdj] == false)
             {
-                pre_node[node->VerAdj] = number;
                 visit[node->VerAdj] = true;
                 myQueue.push(node->VerAdj);
-                break;
             }
-            node = node->link;
         }
     }
-    while (pre_node[end] != 0)
-    {
-        if (pre_node[end] == start)
-        {
-            book = true;
-        }
-        end = pre_node[end];
-    }
-    return book;
+    return false;
 }
 
 void dfs(int cur, int end)
